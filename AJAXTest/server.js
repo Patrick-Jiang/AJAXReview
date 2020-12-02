@@ -51,10 +51,15 @@ let server = http.createServer(function (request, response) {
         response.setHeader('Content-Type', 'text/html;charset=utf-8')
         response.write(fs.readFileSync('public/newHtml.html', 'utf8'))
         response.end()
-    } else {
+    }else if (path === '/db.json') {
+        response.statusCode = 200
+        response.setHeader('Content-Type', 'text/json;charset=utf-8')
+        response.write(fs.readFileSync('public/db.json'))
+        response.end()
+    }  else {
         response.statusCode = 404
         response.setHeader('Content-Type', 'text/html;charset=utf-8')
-        response.write(`你输入的路径不存在对应的内容`)
+        response.write(`404`)
         response.end()
     }
 
