@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+</head>
+<body>
+<form id="signInForm" action="">
+    <div><label >User Name<input type="text" name ="userName" ></label></div>
+    <div><label >Password <input type="password" name ="userPassword"></label></div>
+    <div>
+        <button type="submit">Submit!</button>
+    </div>
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script>
+    const $form =$('#signInForm')
+    $form.on('submit',(e)=>{
+        console.log('submit')
+        e.preventDefault()
+        const name = $form.find('input[name=userName]').val()
+        const password = $form.find('input[name=userPassword').val()
+
+        $.ajax({
+            method:'POST',
+            url:'/signin',
+            contentType:'text/json',
+            data:JSON.stringify({name:name,password})
+        }).then(()=>{
+            location.href  = '/home.html'
+        },()=>{})
+    })
+</script>
+</body>
+</html>
